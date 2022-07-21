@@ -20,7 +20,7 @@ Cada pasta contendo seus arquivos e suas responsabilidades. Deixando o projeto l
 A página home é a principal do projeto, na mesma foi criado um useCallback <b>getWheatherData</b> responsável por fazer a chamada no backend passando as coordenadas extraídas do location.
   
 Foi usado um try catch de forma mais genérica, somente verificando se foi sucesso ou não para fazer suas tratativas. Poderia ser tratado o erro de uma forma mais abrangente...mas preferi por dar mais enfase nas prioridades da funcionalidade.
-  Se a chamada dos dados for positivo, o retorno da chamada que por padrão é uma variável <b>data</> foi passado para uma nova variábel chamada <b>wheatherResponse</b>, essa alimenta o useState <b>setWheatherData</b>.
+  Se a chamada dos dados for positivo, o retorno da chamada que por padrão é uma variável <b>data</b> foi passado para uma nova variábel chamada <b>wheatherResponse</b>, essa alimenta o useState <b>setWheatherData</b>.
   
   O estado <b>wheatherData</b> foi tipado com uma interface informando as propriedades que uso e os tipos dela.
   
