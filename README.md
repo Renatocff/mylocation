@@ -1,46 +1,34 @@
-# Getting Started with Create React App
+<b>Mylocation</b>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://user-images.githubusercontent.com/15160225/180199604-9da72d94-1f5c-4b4b-90f6-3230b44e52fd.png)
 
-## Available Scripts
+<b>Libs utilizadas</b>
 
-In the project directory, you can run:
+- styled-components
+- axios
+- react-icons
+- react-loader-spinner
+- typescript
 
-### `yarn start`
+<b>Estruturação</b>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+O app foi resenvolvido pelos padrões de estrutura normalmente utilizados, dentro da raiz do projeto, foi criado o diretório src que contém toda a lógica estrutura/lógica funcional do app. Tais estruturas são, components, styles, services, pages, interfaces, images.
+Cada pasta contendo seus arquivos e suas responsabilidades. Deixando o projeto legível e de fácil compreensão.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<b>Página Home</b>
 
-### `yarn test`
+A página home é a principal do projeto, na mesma foi criado um useCallback <b>getWheatherData</b> responsável por fazer a chamada no backend passando as coordenadas extraídas do location.
+  
+Foi usado um try catch de forma mais genérica, somente verificando se foi sucesso ou não para fazer suas tratativas. Poderia ser tratado o erro de uma forma mais abrangente...mas preferi por dar mais enfase nas prioridades da funcionalidade.
+  Se a chamada dos dados for positivo, o retorno da chamada que por padrão é uma variável <b>data</> foi passado para uma nova variábel chamada <b>wheatherResponse</b>, essa alimenta o useState <b>setWheatherData</b>.
+  
+  O estado <b>wheatherData</b> foi tipado com uma interface informando as propriedades que uso e os tipos dela.
+  
+  Caso a chamada dê erro, retorno uma mensagem customizada através de um componente <b>CustomErrorMessage</b>.
+  
+  A renderização da index tem uma condicional, um state Booleano com o nome de "loading".
+  é verificado se o loading é true, ele é setado como true assim que a função <b>getWheatherData</b> é chamada...informando que há uma ação em andamento para carregar os dados..enquanto o loading for true, a renderização carrega o spinner. Caso seja falso, é chamado um useMemo com o nome de <b>handleWeather</b>.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+essa função <b>handleWeather</b> verifica se há dados consumidos do back, se sim...carrega o componente <b>Weather</b>, passando como props o <b>#wheatherData</b> e <b>getWheatherData</b>.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+o componente <b>Weather</b> recebe as propriedades que tem sua interface definida para as propriedades, o mesmo renderiza os dados unido os estilos criados com o styled componente e os dados que devem ser informados na interface.
