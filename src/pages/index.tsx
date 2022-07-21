@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 
 import { Container } from "../components/Container";
-import GlobalStyles from '../styles/global';
 import imageBackground from '../images/bg2.jpg';
 import api from "../services/api";
 import { Weather } from "../components/Weather";
@@ -45,7 +44,6 @@ export function Home() {
 
     return (
         <Container bg={imageBackground}>
-            <GlobalStyles />
             {
                 loading ?
                     <TailSpin ariaLabel="loading-indicator" color='white' />
