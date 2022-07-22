@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 
-import { Container } from "../components/Container";
-import imageBackground from '../images/bg2.jpg';
-import api from "../services/api";
-import { Weather } from "../components/Weather";
-import { CustomErrorMessage } from "../components/CustomErrorMessage";
-import { Iwheather } from '../interfaces/Weather/IWeather';
+import { Container } from "../../components/Container";
+import imageBackground from '../../images/bg2.jpg';
+import api from "../../services/api";
+import { Weather } from "../../components/Weather";
+import { CustomErrorMessage } from "../../components/CustomErrorMessage";
+import { Iwheather } from '../../interfaces/Weather/IWeather';
 
 export function Home() {
 
