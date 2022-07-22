@@ -34,7 +34,7 @@ export function Home() {
         if (err.code === 1) {
           setLoading(false);
           alert(
-            "Você precisa permitir o acesso a sua localização no nevegador. Este recurso é necessário para o bom funcionamento da aplicação..."
+            "Você precisa permitir o acesso a sua localização no navegador. Este recurso é necessário para o bom funcionamento da aplicação..."
           );
         }
       }
