@@ -1,8 +1,5 @@
+import { IMesssage } from "../../interfaces/CustomErrorMessage/ICustomErrorMessage";
 import { Message } from "./styles";
-
-interface IMesssage {
-    message: string;
-}
 
 export function CustomErrorMessage({ message }: IMesssage) {
     return(

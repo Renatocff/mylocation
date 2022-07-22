@@ -1,4 +1,4 @@
-export interface IwheatherData {
+export interface Iwheather {
     name: string;
     weather: [
         {

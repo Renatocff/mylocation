@@ -1,14 +1,9 @@
 import { AiOutlineReload } from "react-icons/ai";
 import { TiWeatherCloudy } from "react-icons/ti";
 import { ButtonLoader, ContainerCountry, ContainerInfo, InfoHeader } from "./styles";
-import { IwheatherData } from '../../interfaces/WeatherData';
+import { IWheatherProps } from "../../interfaces/Weather/IProps";
 
-  interface IProps {
-    wheatherData: IwheatherData | undefined;
-    getWheatherData: () => void;
-  }
-
-export function Weather({wheatherData, getWheatherData}: IProps) {
+export function Weather({wheatherData, getWheatherData}: IWheatherProps) {
 
     return (
         <ContainerInfo>

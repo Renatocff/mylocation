@@ -1,12 +1,7 @@
-import { ReactNode } from 'react';
+import { IPropsContainer } from '../../interfaces/Container/IContainer';
 import { Container as ContainerMain } from './styles';
 
-interface IProps {
-    children: ReactNode;
-    bg?: any;    
-}
-
-export function Container({ children, bg }: IProps) {
+export function Container({ children, bg }: IPropsContainer) {
     return(
         <ContainerMain bg={bg}>
             {children}

@@ -6,12 +6,12 @@ import imageBackground from '../images/bg2.jpg';
 import api from "../services/api";
 import { Weather } from "../components/Weather";
 import { CustomErrorMessage } from "../components/CustomErrorMessage/CustomErrorMessage";
-import { IwheatherData } from '../interfaces/WeatherData';
+import { Iwheather } from '../interfaces/Weather/IWeather';
 
 export function Home() {
 
     const [loading, setLoading] = useState<Boolean>(false);
-    const [wheatherData, setWheatherData] = useState<IwheatherData>();
+    const [wheatherData, setWheatherData] = useState<Iwheather>();
 
     const getWheatherData = useCallback(() => {
         setLoading(true);
