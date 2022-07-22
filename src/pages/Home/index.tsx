@@ -2,52 +2,70 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 
 import { Container } from "../../components/Container";
-import imageBackground from '../../images/bg2.jpg';
+import imageBackground from "../../images/bg2.jpg";
 import api from "../../services/api";
 import { Weather } from "../../components/Weather";
 import { CustomErrorMessage } from "../../components/CustomErrorMessage";
-import { Iwheather } from '../../interfaces/Weather/IWeather';
+import { Iwheather } from "../../interfaces/Weather/IWeather";
 
 export function Home() {
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [wheatherData, setWheatherData] = useState<Iwheather>();
 
-    const [loading, setLoading] = useState<Boolean>(false);
-    const [wheatherData, setWheatherData] = useState<Iwheather>();
+  const getWheatherData = useCallback(() => {
+    setLoading(true);
 
-    const getWheatherData = useCallback(() => {
-        setLoading(true);
+    navigator.geolocation.getCurrentPosition(
+      async (location) => {
+        const { latitude: lat, longitude: lon } = location.coords;
 
-        navigator.geolocation.getCurrentPosition(async (location) => {
-            const { latitude: lat, longitude: lon } = location.coords;
+        try {
+          const { data: wheatherResponse } = await api.get(
+            `/weather?lat=${lat}&lon=${lon}&lang=pt_br&&units=metric&appid=${process.env.REACT_APP_APISECRET}`
+          );
 
-            try {
-                const { data: wheatherResponse } = await api.get(`/weather?lat=${lat}&lon=${lon}&lang=pt_br&&units=metric&appid=${process.env.REACT_APP_APISECRET}`);
+          setWheatherData(wheatherResponse);
+          setLoading(false);
+        } catch (err) {
+          setLoading(false);
+        }
+      },
+      (err) => {
+        if (err.code === 1) {
+          setLoading(false);
+          alert(
+            "Você precisa permitir o acesso a sua localização no negador. Este recurso é necessário para o bom funcionamento da aplicação..."
+          );
+        }
+      }
+    );
+  }, [setLoading]);
 
-                setWheatherData(wheatherResponse);
-                setLoading(false);
-            } catch (err) {
-                setLoading(false);
-            }
-        });
-    }, [setLoading]);
-
-    const handleWeather = useMemo(() => {
-        if (wheatherData) return <Weather wheatherData={wheatherData} getWheatherData={getWheatherData} />
-
-        return <CustomErrorMessage message="Estamos passando por um problema interno, volte em breve.." />
-    }, [getWheatherData, wheatherData]);
-
-    useEffect(() => {
-        getWheatherData();
-    }, [getWheatherData])
+  const handleWeather = useMemo(() => {
+    if (wheatherData)
+      return (
+        <Weather
+          wheatherData={wheatherData}
+          getWheatherData={getWheatherData}
+        />
+      );
 
     return (
-        <Container bg={imageBackground}>
-            {
-                loading ?
-                    <TailSpin ariaLabel="loading-indicator" color='white' />
-                    :
-                    handleWeather
-            }
-        </Container>
+      <CustomErrorMessage message="Estamos passando por um problema interno, volte em breve.." />
     );
+  }, [getWheatherData, wheatherData]);
+
+  useEffect(() => {
+    getWheatherData();
+  }, [getWheatherData]);
+
+  return (
+    <Container bg={imageBackground}>
+      {loading ? (
+        <TailSpin ariaLabel="loading-indicator" color="white" />
+      ) : (
+        handleWeather
+      )}
+    </Container>
+  );
 }
