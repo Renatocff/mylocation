@@ -34,12 +34,12 @@ export function Home() {
         if (err.code === 1) {
           setLoading(false);
           alert(
-            "Você precisa permitir o acesso a sua localização no negador. Este recurso é necessário para o bom funcionamento da aplicação..."
+            "Você precisa permitir o acesso a sua localização no nevegador. Este recurso é necessário para o bom funcionamento da aplicação..."
           );
         }
       }
     );
-  }, [setLoading]);
+  }, []);
 
   const handleWeather = useMemo(() => {
     if (wheatherData)
