@@ -13,23 +13,37 @@
 
 <b>Estruturação</b>
 
-O app foi resenvolvido pelos padrões de estrutura normalmente utilizados, dentro da raiz do projeto, foi criado o diretório src que contém toda a lógica estrutura/lógica funcional do app. Tais estruturas são, components, styles, services, pages, interfaces, images.
+O app foi desenvolvido pelos padrões de estrutura normalmente utilizados, dentro da raiz do projeto foi criado o diretório src que contém toda a lógica estrutural /funcional do app. Tais estruturas são, components, styles, services, pages, interfaces, images.
 Cada pasta contendo seus arquivos e suas responsabilidades. Deixando o projeto legível e de fácil compreensão.
 
 <b>Página Home</b>
 
-A página home é a principal do projeto, na mesma foi criado um useCallback <b>getWheatherData</b> responsável por fazer a chamada no backend passando as coordenadas extraídas do location.
+A página home é a principal do projeto, na mesma foi criado um useCallback <b>getWheatherData</b> responsável por fazer a chamada no backend, passando as coordenadas extraídas do location.
   
-Foi usado um try catch de forma mais genérica, somente verificando se foi sucesso ou não para fazer suas tratativas. Poderia ser tratado o erro de uma forma mais abrangente...mas preferi por dar mais enfase nas prioridades da funcionalidade.
-  Se a chamada dos dados for positivo, o retorno da chamada que por padrão é uma variável <b>data</b> foi passado para uma nova variábel chamada <b>wheatherResponse</b>, essa alimenta o useState <b>setWheatherData</b>.
+Foi usado um try catch de forma mais genérica, somente verificando se foi sucesso ou não para fazer suas tratativas. Poderia ser tratado o erro de uma forma mais abrangente mas preferi por dar mais enfase nas prioridades da funcionalidade.
+
+A função faz duas chamadas asyncronas na API, por conta de algo bem específico explicado abaixo. 
+
+- O endpoit que contem os dados de meteorologia do dia e e as previões da semana, não vem com o nome da cidade.
+
+Por conta desse detalhe, precisei fazer uma primeira chamada em um endpoint mais simples, somente para extrair o nome da cidade via spread e montar um objecto contendo o restante das informações no segundo endpoint.
+
+  Se a chamada dos dados for positivo, é criada a variável <b>wheather</b> e feito o spread para junção dos dados que serão utilizados e em seguinda alimentar o state <b>setWheaterData</b>.
   
   O estado <b>wheatherData</b> foi tipado com uma interface informando as propriedades que uso e os tipos dela.
   
   Caso a chamada dê erro, retorno uma mensagem customizada através de um componente <b>CustomErrorMessage</b>.
   
   A renderização da index tem uma condicional, um state Booleano com o nome de "loading".
-  é verificado se o loading é true, ele é setado como true assim que a função <b>getWheatherData</b> é chamada...informando que há uma ação em andamento para carregar os dados..enquanto o loading for true, a renderização carrega o spinner. Caso seja falso, é chamado um useMemo com o nome de <b>handleWeather</b>.
+  É verificado se o loading for true assim que a função <b>getWheatherData</b> é chamada, informando que há uma ação em andamento para carregar os dados e enquanto o loading for true, a renderização carrega o spinner. Caso seja falso, é chamado um useMemo com o nome de <b>handleWeather</b>.
 
-essa função <b>handleWeather</b> verifica se há dados consumidos do back, se sim...carrega o componente <b>Weather</b>, passando como props o <b>#wheatherData</b> e <b>getWheatherData</b>.
+Essa função <b>handleWeather</b> verifica se há dados consumidos do endpoint, se sim, carrega o componente <b>Weather</b>, passando como props o <b>wheatherData</b> e <b>getWheatherData</b>.
 
-o componente <b>Weather</b> recebe as propriedades que tem sua interface definida para as propriedades, o mesmo renderiza os dados unido os estilos criados com o styled componente e os dados que devem ser informados na interface.
+o componente <b>Weather</b> recebe as propriedades que tem sua própria interface, o mesmo renderiza os dados unindo os estilos criados com o styled componente e os dados que devem ser informados na interface.
+
+O componente Weather devido ao tamanho e lógica, foi dividido em mais dois componentes, que são eles <b>GeneralInfos</b> e <b>BoxDailys</b>, os mesmos recebem a propriedade <b>wheatherData</b>.
+
+Por último detalhe funcional, tem a forma como o <b>BoxDailys</b> é renderizado. O mesmo percorre um map que equivale aos dias de previsões da semana, foi criada uma condicional que só renderiza do indice 1 ao 4, explicação abaixo.
+
+- o Indice 0 já tem os dados sendo exibidos na box principal <b>GeneralInfos</b>
+- Foi escolhida renderização apenas dos próximos quatro dias por escolha própria e de layout.
