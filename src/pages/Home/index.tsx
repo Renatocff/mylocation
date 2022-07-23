@@ -20,11 +20,21 @@ export function Home() {
         const { latitude: lat, longitude: lon } = location.coords;
 
         try {
-          const { data: wheatherResponse } = await api.get(
+          const { data: wheatherCity } = await api.get(
             `/weather?lat=${lat}&lon=${lon}&lang=pt_br&&units=metric&appid=${process.env.REACT_APP_APISECRET}`
           );
 
-          setWheatherData(wheatherResponse);
+          const { data: wheatherForecast } = await api.get(
+            `/onecall?appid=${process.env.REACT_APP_APISECRET}&lang=pt_br&units=metric&lat=${lat}&lon=${lon}&exclude=hourly,minutely`
+          );
+
+          const wheather: Iwheather = {
+            ...wheatherForecast,
+            city: wheatherCity.name,
+          };
+
+          setWheatherData(wheather);
+
           setLoading(false);
         } catch (err) {
           setLoading(false);

@@ -1,25 +1,37 @@
+import moment from "moment";
+import "moment/locale/pt-br";
 import { AiOutlineReload } from "react-icons/ai";
-import { TiWeatherCloudy } from "react-icons/ti";
-import { ButtonLoader, ContainerCountry, ContainerInfo, InfoHeader } from "./styles";
 import { IWheatherProps } from "../../interfaces/Weather/IProps";
+import WeatherIcon from "../WeatherIcon";
+import { BoxDailys } from "./Components/BoxDailys";
+import { GeneralInfos } from "./Components/GeneralInfos";
+import { Box, BoxIcon, ButtonRefresh, Container } from "./styles";
 
-export function Weather({wheatherData, getWheatherData}: IWheatherProps) {
+moment.locale("pt-br");
 
-    return (
-        <ContainerInfo>
-            <InfoHeader>
-                <h1>{wheatherData?.name}</h1>
-                <h4>{wheatherData?.weather[0]?.description}</h4>
-                <TiWeatherCloudy size={50} />
-                <strong>{wheatherData?.main.temp} °C</strong>
-            </InfoHeader>
+export function Weather({ wheatherData, getWheatherData }: IWheatherProps) {
+  const daysOfWeek = wheatherData?.daily;
 
-            <ContainerCountry>
-                <strong>{wheatherData?.sys.country === "BR" && "Brasil"}</strong>
-                <ButtonLoader onClick={getWheatherData}>
-                    <AiOutlineReload />
-                </ButtonLoader>
-            </ContainerCountry>
-        </ContainerInfo>
-    );
+  return (
+    <Container>
+      <Box>
+        <GeneralInfos wheatherData={wheatherData} />
+
+        <ButtonRefresh onClick={getWheatherData}>
+          <AiOutlineReload size={25} color="#FFF" />
+        </ButtonRefresh>
+
+        <BoxIcon>
+          <WeatherIcon
+            path={String(daysOfWeek?.[0].weather[0].main.toLowerCase())}
+            size={40}
+            color="#FFF"
+            title={daysOfWeek?.[0].weather[0].description}
+          />
+        </BoxIcon>
+      </Box>
+
+      <BoxDailys wheatherData={wheatherData} />
+    </Container>
+  );
 }

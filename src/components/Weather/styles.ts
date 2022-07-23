@@ -1,62 +1,36 @@
-import styled from 'styled-components';
-import imageHeader from "../../images/time.jpg";
+import styled from "styled-components";
 
-export const ContainerInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #FFF;
-    width: 300px;
-    height: 183px;
-    border-radius: 7px;
-    -webkit-box-shadow: 0px 2px 10px 0px #725D60; 
-    box-shadow: 0px 2px 10px 0px #725D60;
+export const Container = styled.div`
+  -webkit-box-shadow: 1px 6px 9px 0px rgba(0, 0, 0, 0.87);
+  box-shadow: 1px 6px 9px 0px rgba(0, 0, 0, 0.87);
 `;
 
-export const InfoHeader = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 150px;
-    background-image: url(${imageHeader});
-    background-size: cover;
-
-    strong {
-        margin-left: auto;
-        padding-right: 5px;
-        color: #FFF;
-    }
-
-    h1, h4 {
-        opacity: 0.6;
-    }
-
-    svg {
-        opacity: 0.6;
-    }
+export const Box = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(1deg, rgb(29 174 255) 10%, rgb(12 55 109) 90%);
+  border-radius: 5px 5px 0 0;
+  width: 560px;
+  height: 250px;
 `;
 
-export const ContainerCountry = styled.div`
-    background: #001a64;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    strong {
-        color: #FFF;
-    }
+export const BoxIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    1deg,
+    rgb(29 174 255) 10%,
+    rgb(254 254 255 / 3%) 90%
+  );
+  width: 120px;
 `;
 
-export const ButtonLoader = styled.button`
-    background: transparent;
-    border: none;
-    border-radius: 3px;
-    padding: 3px;
-    cursor: pointer;
-
-    svg {
-        margin-top: 2px;
-        color: #FFF;
-    }
+export const ButtonRefresh = styled.button`
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  margin-left: auto;
+  background: transparent;
+  border: none;
 `;
