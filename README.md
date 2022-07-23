@@ -1,6 +1,6 @@
 <b>Mylocation</b>
 
-![image](https://user-images.githubusercontent.com/15160225/180199604-9da72d94-1f5c-4b4b-90f6-3230b44e52fd.png)
+![app](https://user-images.githubusercontent.com/15160225/180617682-ed379ea2-61cd-4370-bfba-02a0b01338ad.gif)
 
 <b>Libs utilizadas</b>
 
@@ -9,6 +9,7 @@
 - react-icons
 - react-loader-spinner
 - typescript
+- moment
 
 <b>Estruturação</b>
 
