@@ -1,6 +1,6 @@
 import { Iwheather } from "./IWeather";
 
 export interface IWheatherProps {
-  wheatherData: Iwheather | undefined;
+  wheatherData: Iwheather;
   getWheatherData?: () => void;
 }
