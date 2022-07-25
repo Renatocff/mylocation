@@ -53,7 +53,7 @@ export const Home = () => {
   }, [setWeather]);
 
   const handleWeather = useMemo(() => {
-    if (weather) return <Weather getWheatherData={getWheatherData} />;
+    if (weather.city) return <Weather getWheatherData={getWheatherData} />;
 
     return (
       <CustomErrorMessage message="Estamos passando por um problema interno, volte em breve.." />
