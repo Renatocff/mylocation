@@ -38,11 +38,11 @@ Por conta desse detalhe, precisei fazer uma primeira chamada em um endpoint mais
   A renderização da index tem uma condicional, um state Booleano com o nome de "loading".
   É verificado se o loading for true assim que a função <b>getWheatherData</b> é chamada, informando que há uma ação em andamento para carregar os dados e enquanto o loading for true, a renderização carrega o spinner. Caso seja falso, é chamado um useMemo com o nome de <b>handleWeather</b>.
 
-Essa função <b>handleWeather</b> verifica se há dados consumidos do endpoint, se sim, carrega o componente <b>Weather</b>, passando como props o <b>wheatherData</b> e <b>getWheatherData</b>.
+Essa função <b>handleWeather</b> verifica se há dados consumidos do endpoint, se sim, carrega o componente <b>Weather</b>, passando como props o <b>getWheatherData</b>.
 
 o componente <b>Weather</b> recebe as propriedades que tem sua própria interface, o mesmo renderiza os dados unindo os estilos criados com o styled componente e os dados que devem ser informados na interface.
 
-O componente Weather devido ao tamanho e lógica, foi dividido em mais dois componentes, que são eles <b>GeneralInfos</b> e <b>BoxDailys</b>, os mesmos recebem a propriedade <b>wheatherData</b>.
+O componente Weather devido ao tamanho e lógica, foi dividido em mais dois componentes, que são eles <b>GeneralInfos</b> e <b>BoxDailys</b>, os mesmos pegam o estado <b>weather</b> através do hook <b>useWeather</b>
 
 Por último detalhe funcional, tem a forma como o <b>BoxDailys</b> é renderizado. O mesmo percorre um map que equivale aos dias de previsões da semana, foi criada uma condicional que só renderiza do indice 1 ao 4, explicação abaixo.
 
