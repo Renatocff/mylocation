@@ -10,6 +10,7 @@
 - react-loader-spinner
 - typescript
 - moment
+- ApiContext
 
 <b>Estruturação</b>
 
@@ -28,9 +29,9 @@ A função faz duas chamadas asyncronas na API, por conta de algo bem específic
 
 Por conta desse detalhe, precisei fazer uma primeira chamada em um endpoint mais simples, somente para extrair o nome da cidade via spread e montar um objecto contendo o restante das informações no segundo endpoint.
 
-  Se a chamada dos dados for positivo, é criada a variável <b>wheather</b> e feito o spread para junção dos dados que serão utilizados e em seguinda alimentar o state <b>setWheaterData</b>.
+  Se a chamada dos dados for positivo, é criada a variável <b>weatherData</b> e feito o spread para junção dos dados que serão utilizados e em seguinda alimentar o state <b>setWeather</b>.
   
-  O estado <b>wheatherData</b> foi tipado com uma interface informando as propriedades que uso e os tipos dela.
+  O estado <b>weather</b> foi tipado com uma interface informando as propriedades que uso e os tipos dela. A mesma esta sendo extraída pelo hook criado para o contexto dos dados. Esse hook evita o prop drilling entre os componentes e facilita a extração direta dos dados para quem precisar dentro da aplicação.
   
   Caso a chamada dê erro, retorno uma mensagem customizada através de um componente <b>CustomErrorMessage</b>.
   
