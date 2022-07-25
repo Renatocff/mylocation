@@ -1,6 +1,5 @@
-import { ReactNode } from "react";
+import { IChildren } from "../Children";
 
-export interface IPropsContainer {
-    children: ReactNode;
-    bg?: any;    
+export interface IPropsContainer extends IChildren {
+  bg?: any;
 }

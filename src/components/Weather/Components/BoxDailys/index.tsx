@@ -1,5 +1,5 @@
 import moment from "moment";
-import { IWheatherProps } from "../../../../interfaces/Weather/IProps";
+import { useWeather } from "../../../../Context/Wheather/useWeather";
 import WeatherIcon from "../../../WeatherIcon";
 import {
   BoxDailys as Container,
@@ -8,12 +8,12 @@ import {
   DayOfWeek,
 } from "./styles";
 
-export function BoxDailys({ wheatherData }: IWheatherProps) {
-  const daysOfWeek = wheatherData?.daily;
+export const BoxDailys = () => {
+  const { weather } = useWeather();
 
   return (
     <Container>
-      {daysOfWeek?.map((day, index) => {
+      {weather.daily.map((day, index) => {
         if (index > 0 && index < 5) {
           return (
             <BoxDay key={index}>
@@ -37,4 +37,4 @@ export function BoxDailys({ wheatherData }: IWheatherProps) {
       })}
     </Container>
   );
-}
+};

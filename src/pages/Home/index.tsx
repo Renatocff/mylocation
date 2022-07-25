@@ -7,10 +7,11 @@ import api from "../../services/api";
 import { Weather } from "../../components/Weather";
 import { CustomErrorMessage } from "../../components/CustomErrorMessage";
 import { Iwheather } from "../../interfaces/Weather/IWeather";
+import { useWeather } from "../../Context/Wheather/useWeather";
 
-export function Home() {
+export const Home = () => {
+  const { weather, setWeather } = useWeather();
   const [loading, setLoading] = useState<Boolean>(false);
-  const [wheatherData, setWheatherData] = useState<Iwheather>();
 
   const getWheatherData = useCallback(() => {
     setLoading(true);
@@ -28,12 +29,12 @@ export function Home() {
             `/onecall?appid=${process.env.REACT_APP_APISECRET}&lang=pt_br&units=metric&lat=${lat}&lon=${lon}&exclude=hourly,minutely`
           );
 
-          const wheather: Iwheather = {
+          const weatherData: Iwheather = {
             ...wheatherForecast,
             city: wheatherCity.name,
           };
 
-          setWheatherData(wheather);
+          setWeather(weatherData);
 
           setLoading(false);
         } catch (err) {
@@ -49,21 +50,15 @@ export function Home() {
         }
       }
     );
-  }, []);
+  }, [setWeather]);
 
   const handleWeather = useMemo(() => {
-    if (wheatherData)
-      return (
-        <Weather
-          wheatherData={wheatherData}
-          getWheatherData={getWheatherData}
-        />
-      );
+    if (weather) return <Weather getWheatherData={getWheatherData} />;
 
     return (
       <CustomErrorMessage message="Estamos passando por um problema interno, volte em breve.." />
     );
-  }, [getWheatherData, wheatherData]);
+  }, [getWheatherData, weather]);
 
   useEffect(() => {
     getWheatherData();
@@ -78,4 +73,4 @@ export function Home() {
       )}
     </Container>
   );
-}
+};

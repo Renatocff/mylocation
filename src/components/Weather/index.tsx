@@ -1,6 +1,7 @@
 import moment from "moment";
 import "moment/locale/pt-br";
 import { AiOutlineReload } from "react-icons/ai";
+import { useWeather } from "../../Context/Wheather/useWeather";
 import { IWheatherProps } from "../../interfaces/Weather/IProps";
 import WeatherIcon from "../WeatherIcon";
 import { BoxDailys } from "./Components/BoxDailys";
@@ -9,13 +10,13 @@ import { Box, BoxIcon, ButtonRefresh, Container } from "./styles";
 
 moment.locale("pt-br");
 
-export function Weather({ wheatherData, getWheatherData }: IWheatherProps) {
-  const daysOfWeek = wheatherData?.daily;
+export const Weather = ({ getWheatherData }: IWheatherProps) => {
+  const { weather } = useWeather();
 
   return (
     <Container>
       <Box>
-        <GeneralInfos wheatherData={wheatherData} />
+        <GeneralInfos />
 
         <ButtonRefresh onClick={getWheatherData}>
           <AiOutlineReload size={25} color="#FFF" />
@@ -23,15 +24,15 @@ export function Weather({ wheatherData, getWheatherData }: IWheatherProps) {
 
         <BoxIcon>
           <WeatherIcon
-            path={String(daysOfWeek?.[0].weather[0].main.toLowerCase())}
+            path={String(weather.daily?.[0].weather[0].main.toLowerCase())}
             size={40}
             color="#FFF"
-            title={daysOfWeek?.[0].weather[0].description}
+            title={weather.daily?.[0].weather[0].description}
           />
         </BoxIcon>
       </Box>
 
-      <BoxDailys wheatherData={wheatherData} />
+      <BoxDailys />
     </Container>
   );
-}
+};

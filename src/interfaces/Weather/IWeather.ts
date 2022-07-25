@@ -4,21 +4,17 @@ export interface Iwheather {
     dt: number;
     temp: number;
   };
-  daily: [
-    {
-      dt: number;
-      temp: {
-        min: number;
-        max: number;
-      };
-      humidity: number;
-      wind_speed: number;
-      weather: [
-        {
-          main: string;
-          description: string;
-        }
-      ];
-    }
-  ];
+  daily: {
+    dt: number;
+    temp: {
+      min: number;
+      max: number;
+    };
+    humidity: number;
+    wind_speed: number;
+    weather: {
+      main: string;
+      description: string;
+    }[];
+  }[];
 }
