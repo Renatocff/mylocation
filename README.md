@@ -48,3 +48,17 @@ Por último detalhe funcional, tem a forma como o <b>BoxDailys</b> é renderizad
 
 - o Indice 0 já tem os dados sendo exibidos na box principal <b>GeneralInfos</b>
 - Foi escolhida renderização apenas dos próximos quatro dias por escolha própria e de layout.
+
+<b>NOTA</b>
+
+Para rodar a aplicação, é necessário criar um arquivo .env na raiz do projeto contento as seguintes variáveis:
+
+REACT_APP_API=https://api.openweathermap.org/data/2.5
+
+REACT_APP_APISECRET=b2325924e4596c88cd3a0de1f3aa0c48
+
+OBS: essa chave criei para testar o projeto, ele roda com ela. Caso queira usar a sua própria é só alterar a mesma no REACT_APP_APISECRET
+
+<b>Considerações Finais</b>
+
+O projeto iniciou com a primeira versão mais simples, depois notei que poderia incrementar mais informações, melhorar processos, layout e fui fazendo diversas atualizações até chegar nesta versão final, pensando nas boas práticas e código limpo.
